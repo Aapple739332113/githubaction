@@ -1,21 +1,25 @@
 name: Manual Windows Workflow
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # 手动触发配置[1,2](@ref)
 
 jobs:
-  build:
-    runs-on: [self-hosted]
-
+  windows-job:
+    runs-on: [self-hosted]  # 指定Windows运行环境[6](@ref)
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set execution policy
-        shell: powershell
-        run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-
-      - name: Run a simple command
-        shell: powershell
+        uses: actions/checkout@v4  # 检出代码库[6](@ref)
+        
+      - name: Show system info
         run: |
-          Write-Host "This is a simple GitHub Actions workflow running on Windows."
+          echo "Running on Windows"
+          systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+          Get-ComputerInfo | Select-Object WindowsVersion
+        shell: pwsh  # 使用PowerShell执行命令[6](@ref)
+
+      - name: Run batch script
+        run: |
+          echo 当前目录内容:
+          dir
+          echo 系统时间: %TIME%
+        shell: cmd  # 使用CMD执行传统批处理命令[6](@ref)
