@@ -11,7 +11,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set execution policy
+        shell: powershell
+        run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+
       - name: Run a simple command
         shell: powershell
         run: |
-          Write-Host "This is a simple GitHub Actions workflow running on Windows."    
+          Write-Host "This is a simple GitHub Actions workflow running on Windows."
