@@ -10,12 +10,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4  # 检出代码库[6](@ref)
         
-      # - name: Show system info
-      #   run: |
-      #     echo "Running on Windows"
-      #     systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
-      #     Get-ComputerInfo | Select-Object WindowsVersion
-      #   shell: pwsh  # 使用PowerShell执行命令[6](@ref)
+      - name: Show system info
+        run: |
+          echo "Running on Windows"
+          systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+          Get-ComputerInfo | Select-Object WindowsVersion
+        shell: pwsh  # 使用PowerShell执行命令[6](@ref)
 
       - name: Run batch script
         run: |
